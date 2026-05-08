@@ -1,8 +1,16 @@
 {
   "rewrites": [
     {
-      "source": "/(.*)",
-      "destination": "/index.html"
+      "source": "/api/iss-now",
+      "destination": "http://api.open-notify.org/iss-now.json"
+    },
+    {
+      "source": "/api/astros",
+      "destination": "http://api.open-notify.org/astros.json"
+    },
+    {
+      "source": "/api/news",
+      "destination": "https://newsdata.io/api/1/news"
     }
   ]
 }

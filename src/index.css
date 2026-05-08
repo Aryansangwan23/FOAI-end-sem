@@ -3,59 +3,39 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
-    --background: #f8fafc;
-    --foreground: #0f172a;
-    --card: #ffffff;
-    --card-foreground: #0f172a;
-    --primary: #3b82f6;
-    --primary-foreground: #ffffff;
-    --secondary: #f1f5f9;
-    --secondary-foreground: #0f172a;
-    --accent: #e2e8f0;
-    --accent-foreground: #0f172a;
-    --border: #e2e8f0;
-  }
-
-  .dark {
-    --background: #020617;
-    --foreground: #f8fafc;
-    --card: #0f172a;
-    --card-foreground: #f8fafc;
-    --primary: #3b82f6;
-    --primary-foreground: #ffffff;
-    --secondary: #1e293b;
-    --secondary-foreground: #f8fafc;
-    --accent: #1e293b;
-    --accent-foreground: #f8fafc;
-    --border: #1e293b;
-  }
-}
-
-@layer base {
-  * {
-    @apply border-border;
-  }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-slate-950 text-slate-100 transition-colors duration-300;
+  }
+  html:not(.dark) body {
+    @apply bg-slate-100 text-slate-900;
   }
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+@layer utilities {
+  /* Dark mode glass panel (default) */
+  .dark .glass-panel {
+    @apply bg-slate-900/40 backdrop-blur-xl border border-slate-700/50 rounded-2xl shadow-[0_8px_32px_0_rgba(0,0,0,0.36)];
+  }
+  /* Light mode glass panel */
+  html:not(.dark) .glass-panel {
+    @apply bg-white/70 backdrop-blur-xl border border-slate-200 rounded-2xl shadow-[0_8px_32px_0_rgba(0,0,0,0.08)];
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-slate-700/50 rounded-full;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    @apply bg-slate-600/50;
+  }
 }
 
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--border);
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--accent);
+/* Leaflet: always keep the dark style regardless of theme */
+.leaflet-container {
+  background: #0f172a !important;
 }
